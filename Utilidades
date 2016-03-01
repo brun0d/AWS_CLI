@@ -4,3 +4,9 @@ AWS CLI Comandos Utiles
 1. Output: Una tabla con instance_id, ip_adress, name, state de todas las instancias de la región en la que se encuentra trabajando:
 
     aws ec2 describe-instances --instance-ids --query "Reservations[*].Instances[*].{name: Tags[?Key=='Name'] | [0].Value, instance_id: InstanceId, ip_address: PrivateIpAddress, state: State.Name}" --output table
+
+2.
+ aws ec2 describe-instances --query 'Reservations[*].Instances[?contains(Tags[0].Value, `appsrv`) && contains(Tags[0].Value, `prod-`)].[PrivateIpAddress,InstanceId,InstanceType,Tags[0].Value,State.Name,SecurityGroups[0].GroupName,SecurityGroups[0].GroupId,Placement.AvailabilityZone ]'
+
+
+
