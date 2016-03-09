@@ -5,8 +5,9 @@ AWS CLI Comandos Utiles
 
     aws ec2 describe-instances --instance-ids --query "Reservations[*].Instances[*].{name: Tags[?Key=='Name'] | [0].Value, instance_id: InstanceId, ip_address: PrivateIpAddress, state: State.Name}" --output table
 
-2.
+2. Lista EC2
  aws ec2 describe-instances --query 'Reservations[*].Instances[?contains(Tags[0].Value, `appsrv`) && contains(Tags[0].Value, `prod-`)].[PrivateIpAddress,InstanceId,InstanceType,Tags[0].Value,State.Name,SecurityGroups[0].GroupName,SecurityGroups[0].GroupId,Placement.AvailabilityZone ]'
 
 
-
+3. Ejemplo de Query en iam
+aws iam list-users --query 'Users[0].UserName' --output json
